@@ -1,0 +1,31 @@
+?start: document
+
+document: block*
+
+?block: header2
+      | header1
+      | unordered_list
+      | paragraph
+
+header1: "# " inline_text _NL
+header2: "## " inline_text _NL
+
+unordered_list: list_item+
+list_item: _BULLET " " inline_text _NL
+_BULLET: "*" | "-"
+
+paragraph: inline_text _NL
+
+inline_text: inline_element+
+
+?inline_element: bold
+               | italic
+               | plain_text
+
+bold: "**" WORD_OR_SPACE "**"
+italic: "*" WORD_OR_SPACE "*"
+plain_text: WORD_OR_SPACE
+
+WORD_OR_SPACE: /[a-zA-Z0-9 ,.!?'-]+/
+
+_NL: "\n"
