@@ -1,6 +1,6 @@
 ?start: document
 
-document: block*
+document: (block | blank_line)*
 
 ?block: header2
       | header1
@@ -26,6 +26,8 @@ bold: "**" WORD_OR_SPACE "**"
 italic: "*" WORD_OR_SPACE "*"
 plain_text: WORD_OR_SPACE
 
-WORD_OR_SPACE: /[a-zA-Z0-9 ,.!?'-]+/
+blank_line: _NL
 
-_NL: "\n"
+WORD_OR_SPACE: /[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ ,.!?'-]+/
+
+_NL: /\r?\n/

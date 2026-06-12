@@ -10,8 +10,12 @@ from ast_nodes import (
 )
 
 class MarkdownTransformer(Transformer):
-    def document(self, blocks):
+    def document(self, children):
+        blocks = [c for c in children if c is not None]
         return DocumentNode(blocks)
+
+    def blank_line(self, args):
+        return None
 
     def header1(self, args):
         return HeaderNode(1, args[0])
