@@ -28,6 +28,6 @@ plain_text: WORD_OR_SPACE
 
 blank_line: _NL
 
-WORD_OR_SPACE: /[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ ,.!?'-]+/
+WORD_OR_SPACE: /[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ ,.!?';:"()\/+_\-]+/
 
 _NL: /\r?\n/
