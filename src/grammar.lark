@@ -1,12 +1,16 @@
+// Entry point of the parser engine
 ?start: document
 
+// Document is a sequence of blocks or blank lines
 document: (block | blank_line)*
 
+// Question mark inlines the block node directly into document children
 ?block: header2
       | header1
       | unordered_list
       | paragraph
 
+// Structural rules for block-level Markdown elements
 header1: "# " inline_text _NL
 header2: "## " inline_text _NL
 
@@ -16,18 +20,23 @@ _BULLET: "*" | "-"
 
 paragraph: inline_text _NL
 
+// Inline structure allows multiple formatting nodes in one block
 inline_text: inline_element+
 
+// Collapse single child inline nodes to simplify AST mapping
 ?inline_element: bold
                | italic
                | plain_text
 
+// Definitions of formatted and plain inline content
 bold: "**" WORD_OR_SPACE "**"
 italic: "*" WORD_OR_SPACE "*"
 plain_text: WORD_OR_SPACE
 
 blank_line: _NL
 
+// Regular expression matching alphanumerics, spaces, punctuation and Polish diacritics
 WORD_OR_SPACE: /[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ ,.!?';:"()\/+_\-]+/
 
+// Line termination supporting both Unix (LF) and Windows (CRLF) platforms
 _NL: /\r?\n/
